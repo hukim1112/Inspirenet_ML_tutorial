@@ -8,6 +8,8 @@ We, InspireNet members, decided to spend our time to learn Machine Learning for 
 
 I want you to put effort into documents you will make, because It could help other people to need well-made documents for ML tutorial. Lastly If you have difficulties on lecture before coming to meeting, visit [here](https://www.coursera.org/learn/machine-learning/discussions?sort=lastActivityAtDesc&page=1)
 
+​															- Daniel
+
 ## Reference
 
 [1] Machine Learning, Andrew Ng : https://www.coursera.org/learn/machine-learning/home/welcome
