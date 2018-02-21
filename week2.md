@@ -43,6 +43,7 @@ Multivariate Linear Regression is Linear regression with multiple variables. we 
 
 
 
+
 - Feature scaling
 
   We can speed up gradient descent by having each of our input values in roughly the same range. This is because θ will descend quickly on small ranges and slowly on large ranges, and so will oscillate inefficiently down to the optimum when the variables are very uneven. In addition, features, which have larger range than other features, are considered more important features, because generally bigger value of feature may has bigger impact on tasks such as regression and classification and so on. 
@@ -85,7 +86,7 @@ Multivariate Linear Regression is Linear regression with multiple variables. we 
   $$
   \frac{\partial J(\theta)}{\partial\theta} = 2X^TX\theta - 2X^Ty = 0 \\
   \text{or : } X^TX\theta = X^Ty \\
-  \therefore \theta = (X^YX)^{-1}X^Ty
+  \therefore \theta = (X^TX)^{-1}X^Ty
   $$
   which this is normal equation.
 
@@ -97,11 +98,11 @@ Multivariate Linear Regression is Linear regression with multiple variables. we 
 
   - Redundant features, where two features are very closely related (i.e. they are linearly dependent). 
 
-    but why? It's because $$rank(X^TX) = rank(X)$$. linearly dependency of X means rank of X is lower than m. If a transformation T is invertible, dim(T) = rank(T). So $$X^TX $$ is not invertible.
+    but why? It's because $$rank(X^TX) = rank(X)$$. linearly dependency of X means rank of X is lower than n. If a transformation T is invertible, dim(T) = rank(T). So $$X^TX $$ is not invertible.
 
   - Too many features (e.g. m ≤ n). In this case, delete some features or use "regularization" (to be explained in a later lesson).
 
-    but why? Matrix X of size m by (n+1) will have rank equal or less than **min(m,n+1)**. So if **m <= n**, then **rank(X) <= m**. $$(X^T)X$$ is a matrix of size (**n+1**) by **n+1**, but has rank equal or less than **m**, which is even smaller than **n+1**. So $$(X^T)X$$ is non-invertible.
+    but why? Matrix X of size m by (n+1) will have rank equal or less than **min(m,n+1)**. So if **m <= n**, then **rank(X) <= m**. $$(X^T)X$$ is a matrix of size (**n+1**) by **n+1**, but has rank equal or less than **m**, which is even smaller than **n+1**. So $$(X^TX)$$ is non-invertible.
 
   Solutions to the above problems include deleting a feature that is linearly dependent with another or deleting one or more features when there are too many features.
 
