@@ -122,6 +122,8 @@ y = "output" variable / "target" variable
 
 
 
+![week1_additional_picture](images/1week/week1_additional_picture.png)
+
 $h_\theta (x) = \theta_0 + \theta_1 x$ ($\theta_i$ : Parameter)	 
 
 ![week1_picture5](images/1week/week1_picture5.png)
@@ -213,3 +215,10 @@ As you updates parameters with gradient descent algorithm to minimize cost funct
 
 'Batch gradient descent' refers to the fact that in every step of gradient descent, we're looking at all of the training examples(m).
 
+
+
+Insert supervisor model learning process picture!!
+
+table of contents!
+
+ 
