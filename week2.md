@@ -102,7 +102,7 @@ Multivariate Linear Regression is Linear regression with multiple variables. we 
 
   - Too many features (e.g. m ≤ n). In this case, delete some features or use "regularization" (to be explained in a later lesson).
 
-    but why? Matrix X of size m by (n+1) will have rank equal or less than **min(m,n+1)**. So if **m <= n**, then **rank(X) <= m**. $$(X^T)X$$ is a matrix of size (**n+1**) by **n+1**, but has rank equal or less than **m**, which is even smaller than **n+1**. So $$(X^TX)$$ is non-invertible.
+    but why? Matrix X of size m by (n+1) will have rank equal or less than **min(m,n+1)** when X is invertible. So if **m <= n**, then **rank(X) <= m**. $$(X^T)X$$ is a matrix of size (**n+1**) by **n+1**, but has rank equal or less than **m**, which is even smaller than **n+1**. So $$(X^TX)$$ is non-invertible.
 
   Solutions to the above problems include deleting a feature that is linearly dependent with another or deleting one or more features when there are too many features.
 
