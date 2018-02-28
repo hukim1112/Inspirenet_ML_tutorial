@@ -42,7 +42,7 @@
 
   - but, linear regression isn't good idea 
 
-    - **사진**
+    - ![features](images/3week/abcd.png)
 
     - in this case, if we run linear regression, we get a straight line fit to the data. but, that blue line is a worse hypothesis.
 
@@ -316,6 +316,7 @@
     $$
 
 
+
 ##Solving the Problem of Overfitting
 
 - the problem of overfitting 
@@ -392,6 +393,7 @@
 
 
 
+
       - $ (1-a\frac{\lambda}{m}) < 1$
 
         because a is small and m is large. so, $\theta_j$ is shrinking bit by bit.
@@ -412,9 +414,9 @@
         \vdots & \vdots & 1
         \end{array} \right)
         $$
-
+    
       - L is a matrix with 0 at the top left and 1's down the diagonal, with 0's everywhere else. It should have dimension (n+1)×(n+1). Intuitively, this is the identity matrix, multiplied with a single real number λ.
-
+    
       - Recall that if m < n, then $X^TX$ is non-invertible. However, when we add the term $λ⋅L$, then $X^TX + λ⋅L$ becomes invertible.
 
   - Regularized logistic regression
