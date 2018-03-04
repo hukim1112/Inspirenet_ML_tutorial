@@ -39,7 +39,7 @@ _CSV_COLUMN_DEFAULTS_PD = [[''], [''], [0], [''], [''], [''],
 parser = argparse.ArgumentParser()
 
 parser.add_argument(
-    '--model_dir', type=str, default='/home/dongsu/Tensorflow/movie_lens/wide_deep_model',
+    '--model_dir', type=str, default='/home/ubuntu/Inspirenet_ML_tutorial/dongsu/wide_deep_model',
     help='Base directory for the model.')
 
 parser.add_argument(
@@ -57,15 +57,15 @@ parser.add_argument(
     '--batch_size', type=int, default=1000, help='Number of examples per batch.')
 
 parser.add_argument(
-    '--train_data', type=str, default='/home/dongsu/Tensorflow/movie_lens/train_df',
+    '--train_data', type=str, default='/home/ubuntu/Inspirenet_ML_tutorial/dongsu/train_df',
     help='Path to the training data.')
 
 parser.add_argument(
-    '--test_data', type=str, default='/home/dongsu/Tensorflow/movie_lens/test_df',
+    '--test_data', type=str, default='/home/ubuntu/Inspirenet_ML_tutorial/dongsu/test_df',
     help='Path to the test data.')
 
 parser.add_argument(
-    '--prediction_data', type=str, default='/home/dongsu/Tensorflow/movie_lens/pred_df_tf',
+    '--prediction_data', type=str, default='/home/ubuntu/Inspirenet_ML_tutorial/dongsu/pred_df_tf',
     help='Path to the prediction data.')
 
 _NUM_EXAMPLES = {
@@ -225,30 +225,30 @@ def build_estimator(model_dir, model_type):
 
   # Create a tf.estimator.RunConfig to ensure the model is run on CPU, which
   # trains faster than GPU for this model.
-  run_config = tf.estimator.RunConfig().replace(
-      session_config=tf.ConfigProto(device_count={'GPU': 0}))
+  #run_config = tf.estimator.RunConfig().replace(
+    #  session_config=tf.ConfigProto(device_count={'GPU': 0}))
 
   if model_type == 'wide':
     return tf.estimator.LinearRegressor(
         model_dir=model_dir,
-        feature_columns=wide_columns,
+        feature_columns=wide_columns)
         #n_classes=5,
-        config=run_config)
+        #config=run_config)
   elif model_type == 'deep':
     return tf.estimator.DNNRegressor(
         model_dir=model_dir,
         feature_columns=deep_columns,
-        hidden_units=hidden_units,
+        hidden_units=hidden_units)
         #n_classes=5,
-        config=run_config)
+        #config=run_config)
   else:
     return tf.estimator.DNNLinearCombinedRegressor(
         model_dir=model_dir,
         linear_feature_columns=wide_columns,
         dnn_feature_columns=deep_columns,
-        dnn_hidden_units=hidden_units,
+        dnn_hidden_units=hidden_units)
         #n_classes=5,
-        config=run_config)
+        #config=run_config)
 
 
 def input_fn(data_file, num_epochs, shuffle, batch_size):
