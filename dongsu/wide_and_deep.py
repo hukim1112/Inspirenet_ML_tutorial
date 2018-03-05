@@ -39,7 +39,7 @@ _CSV_COLUMN_DEFAULTS_PD = [[''], [''], [0], [''], [''], [''],
 parser = argparse.ArgumentParser()
 
 parser.add_argument(
-    '--model_dir', type=str, default='/home/ubuntu/Inspirenet_ML_tutorial/dongsu/wide_deep_model',
+    '--model_dir', type=str, default='/home/dongsu/Tensorflow/movie_lens/wide_deep_model',
     help='Base directory for the model.')
 
 parser.add_argument(
@@ -57,15 +57,15 @@ parser.add_argument(
     '--batch_size', type=int, default=1000, help='Number of examples per batch.')
 
 parser.add_argument(
-    '--train_data', type=str, default='/home/ubuntu/Inspirenet_ML_tutorial/dongsu/train_df',
+    '--train_data', type=str, default='/home/dongsu/Tensorflow/movie_lens/train_df',
     help='Path to the training data.')
 
 parser.add_argument(
-    '--test_data', type=str, default='/home/ubuntu/Inspirenet_ML_tutorial/dongsu/test_df',
+    '--test_data', type=str, default='/home/dongsu/Tensorflow/movie_lens/test_df',
     help='Path to the test data.')
 
 parser.add_argument(
-    '--prediction_data', type=str, default='/home/ubuntu/Inspirenet_ML_tutorial/dongsu/pred_df_tf',
+    '--prediction_data', type=str, default='/home/dongsu/Tensorflow/movie_lens/pred_df_tf',
     help='Path to the prediction data.')
 
 _NUM_EXAMPLES = {
@@ -157,16 +157,15 @@ def build_model_columns():
       'Documentary', 'Drama', 'Fantasy', 'Film_Noir', 'Horror', 'Musical',
       'Mystery', 'Romance', 'Sci_Fi', 'Thriller', 'War', 'Western'], hash_bucket_size=10000)
 
-  #zipcode_genres = tf.feature_column.crossed_column([crossed_column_genres, 'Zipcode'], hash_bucket_size=10000)
+  zipcode_genres = tf.feature_column.crossed_column([crossed_column_genres, 'Zipcode'], hash_bucket_size=10000)
 
-  #userid_zipcode = tf.feature_column.crossed_column(['UserID', 'Zipcode'], hash_bucket_size=10000)
+  userid_zipcode = tf.feature_column.crossed_column(['UserID', 'Zipcode'], hash_bucket_size=10000)
 
 
   # Wide columns and deep columns.
   base_columns = [
-       Gender, Age, Occupation, crossed_column_genres, UserID
-        Action, Adventure, Animation, Children, Comedy, Crime, Documentary, Drama,
-        Fantasy, Film_Noir, Horror, Musical, Mystery, Romance, Sci_Fi, Thriller, War, Western
+        UserID, Zipcode, userid_zipcode, zipcode_genres
+
 
 
     # Wide columns and deep columns.
@@ -174,44 +173,41 @@ def build_model_columns():
 
   crossed_columns = [
       tf.feature_column.crossed_column(
-          [crossed_column_genres, 'UserID'], hash_bucket_size=1000000),
+          [crossed_column_genres, 'UserID'], hash_bucket_size=100000),
       tf.feature_column.crossed_column(
-          ['Gender', 'Age'], hash_bucket_size=1000),
+          ['UserID', zipcode_genres], hash_bucket_size=10000),
       tf.feature_column.crossed_column(
-          ['Gender', 'Age','Occupation'], hash_bucket_size=1000),
-      tf.feature_column.crossed_column(
-          [crossed_column_genres, 'Age'], hash_bucket_size=10000),
-      tf.feature_column.crossed_column(
-          [crossed_column_genres, 'Gender'], hash_bucket_size=10000),
+          [userid_zipcode, zipcode_genres], hash_bucket_size=10000),
+
           ]
 
   wide_columns = base_columns + crossed_columns
 
   deep_columns = [
       #Timestamp,
-      tf.feature_column.indicator_column(Age),
-      tf.feature_column.indicator_column(Gender),
-      tf.feature_column.indicator_column(Occupation),
-      #tf.feature_column.embedding_column(Zipcode, dimension=8),
+      #tf.feature_column.indicator_column(Age),
+      #tf.feature_column.indicator_column(Gender),
+      #tf.feature_column.indicator_column(Occupation),
+      tf.feature_column.embedding_column(Zipcode, dimension=8),
       tf.feature_column.embedding_column(UserID, dimension=8),
-      tf.feature_column.embedding_column(Action, dimension=4),
-      tf.feature_column.embedding_column(Adventure, dimension=4),
-      tf.feature_column.embedding_column(Animation, dimension=4),
-      tf.feature_column.embedding_column(Children, dimension=4),
-      tf.feature_column.embedding_column(Comedy, dimension=4),
-      tf.feature_column.embedding_column(Crime, dimension=4),
-      tf.feature_column.embedding_column(Documentary, dimension=4),
-      tf.feature_column.embedding_column(Drama, dimension=4),
-      tf.feature_column.embedding_column(Fantasy, dimension=4),
-      tf.feature_column.embedding_column(Film_Noir, dimension=4),
-      tf.feature_column.embedding_column(Horror, dimension=4),
-      tf.feature_column.embedding_column(Musical, dimension=4),
-      tf.feature_column.embedding_column(Mystery, dimension=4),
-      tf.feature_column.embedding_column(Romance, dimension=4),
-      tf.feature_column.embedding_column(Sci_Fi, dimension=4),
-      tf.feature_column.embedding_column(Thriller, dimension=4),
-      tf.feature_column.embedding_column(War, dimension=4),
-      tf.feature_column.embedding_column(Western, dimension=4),
+      #tf.feature_column.embedding_column(Action, dimension=4),
+      #tf.feature_column.embedding_column(Animation, dimension=4),
+      #tf.feature_column.embedding_column(Adventure, dimension=4),
+      #tf.feature_column.embedding_column(Children, dimension=4),
+      #tf.feature_column.embedding_column(Comedy, dimension=4),
+      #tf.feature_column.embedding_column(Crime, dimension=4),
+      #tf.feature_column.embedding_column(Documentary, dimension=4),
+      #tf.feature_column.embedding_column(Drama, dimension=4),
+      #tf.feature_column.embedding_column(Fantasy, dimension=4),
+      #tf.feature_column.embedding_column(Film_Noir, dimension=4),
+      #tf.feature_column.embedding_column(Horror, dimension=4),
+      #tf.feature_column.embedding_column(Musical, dimension=4),
+      #tf.feature_column.embedding_column(Mystery, dimension=4),
+      #tf.feature_column.embedding_column(Romance, dimension=4),
+      #tf.feature_column.embedding_column(Sci_Fi, dimension=4),
+      #tf.feature_column.embedding_column(Thriller, dimension=4),
+      #tf.feature_column.embedding_column(War, dimension=4),
+      #tf.feature_column.embedding_column(Western, dimension=4),
       #tf.feature_column.embedding_column(UserID, dimension=8),
   ]
   return wide_columns, deep_columns
@@ -225,30 +221,30 @@ def build_estimator(model_dir, model_type):
 
   # Create a tf.estimator.RunConfig to ensure the model is run on CPU, which
   # trains faster than GPU for this model.
-  #run_config = tf.estimator.RunConfig().replace(
-    #  session_config=tf.ConfigProto(device_count={'GPU': 0}))
+  run_config = tf.estimator.RunConfig().replace(
+      session_config=tf.ConfigProto(device_count={'GPU': 0}))
 
   if model_type == 'wide':
     return tf.estimator.LinearRegressor(
         model_dir=model_dir,
-        feature_columns=wide_columns)
+        feature_columns=wide_columns,
         #n_classes=5,
-        #config=run_config)
+        config=run_config)
   elif model_type == 'deep':
     return tf.estimator.DNNRegressor(
         model_dir=model_dir,
         feature_columns=deep_columns,
-        hidden_units=hidden_units)
+        hidden_units=hidden_units,
         #n_classes=5,
-        #config=run_config)
+        config=run_config)
   else:
     return tf.estimator.DNNLinearCombinedRegressor(
         model_dir=model_dir,
         linear_feature_columns=wide_columns,
         dnn_feature_columns=deep_columns,
-        dnn_hidden_units=hidden_units)
+        dnn_hidden_units=hidden_units,
         #n_classes=5,
-        #config=run_config)
+        config=run_config)
 
 
 def input_fn(data_file, num_epochs, shuffle, batch_size):
