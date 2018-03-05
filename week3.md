@@ -7,7 +7,7 @@
   - examples of classification problems
 
     - email spam classification
-    - online trasaction classification
+    - online transaction classification
       - fraudulent transaction or not
     - tumor classification
       - cancerous, malignant tumors or benign tumors
@@ -95,7 +95,7 @@
 
     - $$
       h_{\theta}(x)=P(y=1|x;\theta)\\
-      P(y=0|x:\theta)+P(y=1|x;\theta)=1\\
+      P(y=0|x;\theta)+P(y=1|x;\theta)=1\\
       P(y=1|x;\theta)=1-P(y=0|x;\theta)
       $$
 
@@ -171,7 +171,7 @@
     - ![features](images/3week/convex.png)
     - convex function
       - sigle bow-shaped function
-      - if we run $\theta$, we would be guaranteed with gradient descent that would converge to the global minimum
+      - if we run with $\theta$, we would be guaranteed with gradient descent that would converge to the global minimum
     - non-convex function
       - not single bow-shaped function
       - many local optima
@@ -206,14 +206,14 @@
 
     - so,
       $$
-      J(\theta)=\frac{1}{m}\sum^m_{i=1}Cost(h_\theta(x^{(1)}),y^{(1)})\\=-\frac{1}{m}[\sum^m_{i=1}y^{(i)}\log(h_\theta(x^{(i)})) +(1-y^{(i)})\log(1-h_\theta(x^{(i)}))]
+      J(\theta)=\frac{1}{m}\sum^m_{i=1}Cost(h_\theta(x^{(i)}),y^{(i)})\\=-\frac{1}{m}[\sum^m_{i=1}y^{(i)}\log(h_\theta(x^{(i)})) +(1-y^{(i)})\log(1-h_\theta(x^{(i)}))]
       $$
       ​
 
     - why does we use this cost function?
 
-      - because, this cost function can be derived from statistics using the principle of maximum likelihood estimation Which is an idea in statistics for how to efficiently find parameters' data for different models. 
-      - And it also has a nice property that it is convex. 
+      - because, this cost function can be derived from statistics using the principle of maximum likelihood estimation Which is an idea in statistics for how to efficiently find parameters' data for different models.
+      - And it also has a nice property that it is convex.
 
     - fitting parameters
 
@@ -262,7 +262,7 @@
       - BFGS
       - L-BFGS
     - Advantages of these three algorithms
-      - No need to manually pick $a$
+      - No need to manually pick $a​$
       - Often faster than gradient descent
     - Disadvantages of these three algorithms
       - More complex
@@ -317,6 +317,9 @@
 
 
 
+
+
+
 ##Solving the Problem of Overfitting
 
 - the problem of overfitting 
@@ -343,12 +346,12 @@
   - main cause of overfitting
     -  too many features
   - main options for addressing overfitting
-    - option1 : reduce number of feeatures
-      - manuaaly select which features to keep
+    - option1 : reduce the number of features
+      - manualy select which features to keep
         : which are the more important features
       - model selection algorithm
         : automatically decide to keep or throw out
-    - option2 : regularization
+    - option2 : regularization(weight decay)
       - keep all the features, but reduce magnitude/values of parameters $\theta_j$
       - works well when we have a lot of features, each of which contributes a bit to predicting $y$
 
@@ -358,9 +361,8 @@
 
     - "simpler" hypothesis $\to$ less prone to overfitting
     - ![features](images/3week/regularization_idea.png)
-    - but, there are lots of features, we can't know which feature must be smaller. 
-
-  - regularized cost function
+    - but, there are lots of features, we t
+    -
 
     - formula
       $$
@@ -394,30 +396,37 @@
 
 
 
-      - $ (1-a\frac{\lambda}{m}) < 1$
 
-        because a is small and m is large. so, $\theta_j$ is shrinking bit by bit.
 
-    - normal equation
 
-      - ![features](images/3week/normal_equation1.png)
+  - $ (1-a\frac{\lambda}{m}) < 1$
 
-      - ![features](images/3week/non_invertibility.png)
+​    because a is small and m is large. so, $\theta_j$ is shrinking bit by bit.
 
-      - To add in regularization, the equation is the same as our original, except that we add another term inside the parentheses:
-        $$
-        \theta=(X^TX+\lambda L)^{-1}X^{T}y\\
-        where\ \mathbf{L} =
-        \left( \begin{array}{ccc}
-        0 & 0 & \ldots \\
-        0 & 1 & \ldots \\
-        \vdots & \vdots & 1
-        \end{array} \right)
-        $$
-    
-      - L is a matrix with 0 at the top left and 1's down the diagonal, with 0's everywhere else. It should have dimension (n+1)×(n+1). Intuitively, this is the identity matrix, multiplied with a single real number λ.
-    
-      - Recall that if m < n, then $X^TX$ is non-invertible. However, when we add the term $λ⋅L$, then $X^TX + λ⋅L$ becomes invertible.
+- normal equation
+
+
+  - ![features](images/3week/normal_equation1.png)
+
+
+  - ![features](images/3week/non_invertibility.png)
+
+
+  - To add in regularization, the equation is the same as our original, except that we add another term inside the parentheses:
+    $$
+    \theta=(X^TX+\lambda L)^{-1}X^{T}y\\
+    where\ \mathbf{L} =
+    \left( \begin{array}{ccc}
+    0 & 0 & \ldots \\
+    0 & 1 & \ldots \\
+    \vdots & \vdots & 1
+    \end{array} \right)
+    $$
+
+  - L is a matrix with 0 at the top left and 1's down the diagonal, with 0's everywhere else. It should have dimension (n+1)×(n+1). Intuitively, this is the identity matrix, multiplied with a single real number λ.
+
+  - Recall that if m < n, then $X^TX$ is non-invertible. However, when we add the term $λ⋅L$, then $X^TX + λ⋅L$ becomes invertible.
+
 
   - Regularized logistic regression
 
