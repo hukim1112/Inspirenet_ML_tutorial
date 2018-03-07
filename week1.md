@@ -217,8 +217,6 @@ As you updates parameters with gradient descent algorithm to minimize cost funct
 
 
 
-Insert supervisor model learning process picture!!
 
-table of contents!
 
  
