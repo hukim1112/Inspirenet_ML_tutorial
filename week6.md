@@ -81,6 +81,7 @@
 
 
 
+
 ##### model selection and train / validation / test sets
 
 1. Model selection problem
@@ -196,14 +197,74 @@
 
 #####Prioritizing what to work on
 
+1. Example of spam and non-spam
+   ![12](images/6week/11.spam and non-spam.png)
+2. Classification problem
+   1. To distinguish whether spam and non-spam, we use supervised learning.
+   2. x=features of email
+      y=spam(1) or not spam(0)
+      features x : Choose 100 words indicative of spam/not spam
+   3. ![13](images/6week/13.png)
+3. Method for getting low error
+   1. Colleting lots of data(E.g. "honeypot" project)
+   2. Developing sophisticated features based on email routing information(from email header)
+   3. Developing sophisticated features for messge body
+      - "discount" and "discounts" be treated as the same word? 
+      - How about "deal"and "Dealer"? 
+      - Features about (.)?
+   4. Developing sophisticaed algorithm to detect misspellings(e.g. m0rtagege, etc.)
+
 ##### Error analysis
+
+1. Recommended approach
+   1. Start with a simple algorithm, implement it quickly, and test it early on your cross validation data.
+   2. Plot learning curves to decide if more data, more features, etc. are likely to help.
+   3. Manually examine the errors on examples in the cross validation set and try to spot a trend where most of the errors were made.
+   4. When we perform error analysis, using the $J_{CV}(\theta)$ is recommended rather than the $J_{test}(\theta)$. Because, If we develop new features by examining the test set, then we may end up choosing features that work well specifically for the test set, so $J_{test}(\theta)$ is no longer a good estimate
+2. The importance of numerical evaluation
+   1. Example of error analysis
+      ![14](images/6week/14.png)
+   2. "stemming(어간추출)" means the removal of unwanted parts from a changed word and the extraction of the original form of the word in NLP
+   3. The importance of numerical evaluation
+      ![14](images/6week/15.png)
+3. Conclusion
+   Hence, we should try new things, get a numerical value for our error rate, and based on our result decide whether we want to keep the new feature or not.
 
 ### Handling Skewed Data
 
 ##### Error metrics for Skewed classes
 
+1. classification example
+   ![21](images/6week/14.png)
+
+2. Defining Precision / Recall
+
+   1. ![20](images/6week/20.png)
+
+   2. Precision(정확도)
+      $$
+      \frac{\text{ True positives}}{\text{#predicted positive}}=\frac{\text{ True positives}}{\text{true positive+false positive}}
+      $$
+
+   3. Recall(재현률)
+      $$
+      \frac{\text{ True positives}}{\text{#actual positive}}=\frac{\text{ True positives}}{\text{true positive+false negative}}
+      $$
+
+3. How to learning algorithm doing
+
+   1. If a classifier is getting high precision and high recall, then we are actually confident taht the algorithm has to be doing well, even if we have very skewed classes.
+   2. Calculating precision and recall is often a much better way to evaluate our learning algorithms than looking at classification error, when the classes are very skewed
+
 #####Trading off precision and recall
+
+1. ![30](images/6week/30.png)
+2. ![31](images/6week/31.png)
 
 ###Using Large Data Sets
 
 ##### Data for machine learning
+
+1. ![32](images/6week/32.png)
+2. ![33](images/6week/33.png)
+3. ![34](images/6week/34.png)
