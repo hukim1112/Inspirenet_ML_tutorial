@@ -79,14 +79,11 @@
 
 
 
-
-
-
 ##### model selection and train / validation / test sets
 
 1. Model selection problem
 
-   1. $d$ = defree of polynomial
+   1. $d$ = degree of polynomial
    2. when we select a model, there are many choices according to $d$.
    3. ![1.model selection.png](images/6week/1.model selection.png)
 
@@ -160,9 +157,9 @@
 
 3. Procedure for selecting $\lambda$
 
-   1. Create a list of lambdas
-   2. Create a set of models with different degrees or any other variants.**(???)**
-   3. Calculate each $\theta^{(\lambda)}$ which makes $min_{\theta^{(\lambda)}} J({\theta}^{(\lambda)})$.
+   1. Create a list of lambdas.
+   2. Create a set of models with different degrees or any other variants.
+   3. Calculate each $\theta^{(\lambda)}​$ which makes $min_{\theta^{(\lambda)}} J({\theta}^{(\lambda)})​$.
    4. Find the combo($\theta$  and $\lambda$) which makes $min J_{CV}({\theta})$ **without** regularization term or λ = 0. And that is our  regularization parameter.
    5. Using the best combo($\theta$  and $\lambda$), Estimate the generalization using $J_{test}({\theta})$.
 
@@ -185,7 +182,7 @@
    4. Trying decreasing $\lambda$ will be helpful to fix that.
    5. In **neural network**, it can be shown when parameters are few("small" NN). It is also computationally cheaper.
 2. In high variance
-   1. It would be shown when $J_{train}(\theta)$ is similar to $J_{CV}(\theta)$ and both of them are high.
+   1. It would be shown when $J_{CV}(\theta)$ is high even though  $J_{train}(\theta)$ is low.
    2. Getting more training examples will be helpful to fix that.
    3. Trying smaller sets of features will be helpful to fix that.
    4. Trying increasing $\lambda$ will be helpful to fix that.
@@ -241,19 +238,19 @@
 
    1. ![20](images/6week/20.png)
 
-   2. Precision(정확도)
+   2. Precision : 왔다고했는데 진짜로 온 경우
       $$
       \frac{\text{ True positives}}{\text{#predicted positive}}=\frac{\text{ True positives}}{\text{true positive+false positive}}
       $$
 
-   3. Recall(재현률)
+   3. Recall : 진짜로 온걸 맞춘 경우
       $$
       \frac{\text{ True positives}}{\text{#actual positive}}=\frac{\text{ True positives}}{\text{true positive+false negative}}
       $$
 
 3. How to learning algorithm doing
 
-   1. If a classifier is getting high precision and high recall, then we are actually confident taht the algorithm has to be doing well, even if we have very skewed classes.
+   1. If a classifier is getting high precision and high recall, then we are actually confident that the algorithm has to be doing well, even if we have very skewed classes.
    2. Calculating precision and recall is often a much better way to evaluate our learning algorithms than looking at classification error, when the classes are very skewed
 
 #####Trading off precision and recall
