@@ -29,8 +29,10 @@ The most famous clustering algorithm is K-means.
 
 ​	
 $$
-J(c^{1},...,c^2, \mu_1, ...\mu_K) = \frac{1}{m}\sum^m_{i=1}||x^i - \mu_{c^{i}}||^2
+J(c^{1},...,c^m, \mu_1, ...\mu_K) = \frac{1}{m}\sum^m_{i=1}||x^i - \mu_{c^{i}}||^2
 $$
+
+
 ​	Therefore we want to find $$c^i$$ which means index of cluster to which data $$x^i$$ is currently assigned and $$\mu_i$$ which means cluster centroid of cluster to which data $$x^i$$ has been assigned.
 
 ![5](images/8week/5.png)
